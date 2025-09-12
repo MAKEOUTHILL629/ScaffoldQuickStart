@@ -7,11 +7,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UseCasesConfigTest {
+class UseCasesConfigTest {
 
     @Test
     void testUseCaseBeansExist() {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestConfig.class)) {
+            // This test just checks that beans ending with "UseCase" are being created.
+            // By providing mock gateways, the real use cases can be instantiated.
             String[] beanNames = context.getBeanDefinitionNames();
 
             boolean useCaseBeanFound = false;
@@ -22,23 +24,23 @@ public class UseCasesConfigTest {
                 }
             }
 
-            assertTrue(useCaseBeanFound, "No beans ending with 'Use Case' were found");
+            assertTrue(useCaseBeanFound, "No beans ending with 'UseCase' were found");
         }
     }
 
     @Configuration
-    @Import(UseCasesConfig.class)
+    @Import(UseCasesConfig.class) // This imports the real configuration that scans for our use cases
     static class TestConfig {
 
+        // Provide mock beans for the gateways that our real use cases depend on
         @Bean
-        public MyUseCase myUseCase() {
-            return new MyUseCase();
+        public co.com.bancolombia.model.roles.gateways.RoleRepository roleRepository() {
+            return org.mockito.Mockito.mock(co.com.bancolombia.model.roles.gateways.RoleRepository.class);
         }
-    }
 
-    static class MyUseCase {
-        public String execute() {
-            return "MyUseCase Test";
+        @Bean
+        public co.com.bancolombia.model.roles.gateways.RoleEventPublisher roleEventPublisher() {
+            return org.mockito.Mockito.mock(co.com.bancolombia.model.roles.gateways.RoleEventPublisher.class);
         }
     }
 }

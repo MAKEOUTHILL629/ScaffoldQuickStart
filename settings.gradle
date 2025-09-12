@@ -28,3 +28,5 @@ include ':sqs-sender'
 project(':sqs-sender').projectDir = file('./infrastructure/driven-adapters/sqs-sender')
 include ':dynamo-db'
 project(':dynamo-db').projectDir = file('./infrastructure/driven-adapters/dynamo-db')
+include ':sqs-listener'
+project(':sqs-listener').projectDir = file('./infrastructure/driven-adapters/sqs-listener')

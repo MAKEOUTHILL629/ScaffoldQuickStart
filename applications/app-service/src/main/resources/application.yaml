@@ -30,3 +30,5 @@ adapter:
 aws:
   dynamodb:
     endpoint: "http://localhost:8000"
+    table-name: "roles-table"
+    event-log-table-name: "role-events-log-table"
