@@ -26,8 +26,9 @@ adapter:
   sqs:
     region: "us-east-1"
     queueUrl: "http://localhost:4566/000000000000/sample"
-    endpoint: "http://localhost:4566 # For localstack only"
+    endpoint: "http://localhost:4566"
 aws:
+  region: "us-east-1"
   dynamodb:
     endpoint: "http://localhost:8000"
     table-name: "roles-table"

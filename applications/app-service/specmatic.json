@@ -1,0 +1,11 @@
+{
+  "sources": [
+    {
+      "provider": "filesystem",
+      "repository": "../..",
+      "contracts": [
+        "openapi.yaml"
+      ]
+    }
+  ]
+}
